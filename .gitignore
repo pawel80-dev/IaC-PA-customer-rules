@@ -225,6 +225,8 @@ override.tf.json
 terraform.rc
 
 ########################## Azurite and blob ###########################
-
 __azurite*
 __blob*
+
+############################# Excel temp ##############################
+~$*.xlsx

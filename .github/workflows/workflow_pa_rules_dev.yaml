@@ -21,6 +21,8 @@ env:
   PA_API_URL: 'https://10.12.0.40'
   # the easiest way is to regenerate API key is to change the API user password
   PA_API_KEY: ${{ secrets.PA_API_KEY }}
+  PA_EX_FILE_PATH: 'customer_rules/customer_A.xlsx'
+  PA_EX_SHEET: 'Rules'
   PY_CODE_PATH: 'source'
 
 jobs:
@@ -50,3 +52,12 @@ jobs:
           python ${{ env.PY_CODE_PATH }}/pa_current_config.py \
                  ${{ env.PA_API_URL }} \
                  ${{ env.PA_API_KEY }}
+
+      - name: 'PA: Add customer rules'
+        if: ${{ github.event.inputs.action_type == 'PA-add-rules' }}
+        run: |
+          python ${{ env.PY_CODE_PATH }}/pa_deploy_services.py \
+                 ${{ env.PA_API_URL }} \
+                 ${{ env.PA_API_KEY }} \
+                 ${{ env.PA_EX_FILE_PATH }} \
+                 ${{ env.PA_EX_SHEET }}
