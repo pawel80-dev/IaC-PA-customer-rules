@@ -44,3 +44,9 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r ${{ env.PY_CODE_PATH }}/requirements.txt
 
+      - name: 'PA: Current config'
+        if: ${{ github.event.inputs.action_type == 'PA-display-rules' }}
+        run: |
+          python ${{ env.PY_CODE_PATH }}/pa_current_config.py \
+                 ${{ env.PA_API_URL }} \
+                 ${{ env.PA_API_KEY }}
