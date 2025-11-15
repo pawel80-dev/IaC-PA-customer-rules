@@ -63,7 +63,7 @@ jobs:
       - name: 'PA: Add customer rules'
         if: ${{ github.event.inputs.action_type == 'PA-add-rules' }}
         run: |
-          python ${{ env.PY_CODE_PATH }}/pa_deploy_services.py \
+          python ${{ env.PY_CODE_PATH }}/pa_deploy_policies.py \
                  ${{ env.PA_API_URL }} \
                  ${{ env.PA_API_KEY }} \
                  ${{ env.PA_EX_FILE_PATH }} \

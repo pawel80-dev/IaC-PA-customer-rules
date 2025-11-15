@@ -43,6 +43,7 @@ def create_config(file_path, sheet_name=None) -> None:
     cfg_addr_groups = {}
     cfg_services = []
     cfg_policies = {}
+    all_configs = {}
 
     # Start from the 1st row to set the config_flag
     # row is a list of cells in that row
@@ -70,7 +71,10 @@ def create_config(file_path, sheet_name=None) -> None:
     logger.info(f"Config address groups:\n{cfg_addr_groups}")
     logger.info(f"Services:\n{cfg_services}")
 
-    return cfg_addr_groups, cfg_services
+    all_configs["services"] = cfg_services
+    all_configs["addr_groups"] = cfg_services
+
+    return all_configs
 
 # def read_excel_file(file_path, sheet_name=None) -> None:
 #     excel_workbook = load_workbook(filename=file_path, data_only=True)
