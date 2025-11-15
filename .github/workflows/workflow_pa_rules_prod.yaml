@@ -1,0 +1,17 @@
+name: 'PA customer rules prod'
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  deploy_prod:
+    name: 'PA customer rules solution deployment'
+    runs-on: self-hosted
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v5
+
+      - name: Main branch - Prod info
+        run: echo "Lack of resources to build PROD environment..."
