@@ -681,7 +681,7 @@ def display_sec_policies(pa_url: str, api_key: str) -> dict:
 
     if response.status_code == 200:
         logger.info("PA policies data successfully retrieved.")
-        logger.info(response.text)
+        # logger.info(response.text)
         return json.loads(response.text)  # convert json to dictionary
     else:
         logger.info(f"Failed to retrieved PA policies data: {response.status_code}")
