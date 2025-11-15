@@ -6,4 +6,4 @@
 The purpose of this project is to demonstrate ...
 
 ![alt text](drawings/fw_rules_v01.png)  
-*Alarm notification Github workflow menu*  
+*PA customer rules deployment - general design*  
