@@ -54,7 +54,7 @@ jobs:
                  ${{ env.PA_API_KEY }}
 
       - name: 'PA: validate the template file'
-        if: ${{ github.event.inputs.action_type != 'PA-display-rules' }}
+        if: ${{ github.event.inputs.action_type == 'PA-display-rules' }}
         run: |
           python ${{ env.PY_CODE_PATH }}/pa_temp_validation.py \
                  ${{ env.PA_EX_FILE_PATH }} \
