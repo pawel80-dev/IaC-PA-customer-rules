@@ -17,10 +17,11 @@ def main() -> None:
 
     for addr_group in conf["addr_groups"]:
         for addr_object in addr_group["objects"]:
+            addr_group_items = []
             for addr_obj_name, addr_obj_value in addr_object.items():
                 create_obj_addresses(args.pa_api_url, args.pa_api_key, addr_obj_name, addr_obj_value, "")
-                # create_obj_addresses(args.pa_api_url, args.pa_api_key, "server2", "10.0.0.2/32", "Server 2")
-        create_address_group(args.pa_api_url, args.pa_api_key, addr_group["name"], [d.keys() for d in addr_group["objects"]], "")
+                addr_group_items.append(addr_obj_name)
+            create_address_group(args.pa_api_url, args.pa_api_key, addr_group["name"], addr_group_items, "")
 
 
 if __name__ == "__main__":
