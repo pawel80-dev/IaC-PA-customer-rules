@@ -61,7 +61,7 @@ def get_api_key(pa_url: str, username: str, password: str) -> str:
         # logger.info([elem.tag for elem in root.iter()])
         api_key_iter = root.iter("key")  # iterator, not possible to display directly
         api_key = list(api_key_iter)[0].text  # convert iterator to list to access the value
-        logger.info(f"PA API key: {api_key}")
+        logger.info(f"PA API key:\n{api_key}")
         return api_key
     else:
         logger.info(f"Failed to retrieved PA API key: {response.status_code}")
@@ -735,9 +735,7 @@ def create_sec_policy(pa_url: str, api_key: str, name: str, src_zone: str, src_a
                 ]
             },
             "service": {
-                "member": [
-                    service
-                ]
+                "member": service
             },
             "action": action,
             "description": desc
@@ -827,9 +825,9 @@ def create_sec_policy(pa_url: str, api_key: str, name: str, src_zone: str, src_a
         logger.info(response.text)
 
 
-def update_sec_policy(pa_url: str, api_key: str, name: str, src_zone: str, dst_zone: str, 
-                      src_addr: str, dst_addr: str, app: str, 
-                      service: str, action: str, desc: str = "") -> None:
+def update_sec_policy(pa_url: str, api_key: str, name: str, src_zone: str, src_addr: str,  
+                      dst_zone: str, dst_addr: str, app: str, 
+                      service: list, action: str, desc: str = "") -> None:
     api = "/restapi/v11.2/Policies/SecurityRules"
     url = pa_url + api
     logger.info("Update security policy...")
@@ -996,6 +994,7 @@ def move_security_policy(pa_url: str, api_key: str, name: str, from_where: str, 
 
 def main() -> None:
     # xml_get_system_info(api_url, pa_api_key)
+    get_api_key(api_url, "api_rw", "Cisco123")
 
     display_obj_services(api_url, pa_api_key)
     # create_obj_services(api_url, pa_api_key, "csp2", "udp", "22,24-27", "Custom service port2")
@@ -1017,12 +1016,12 @@ def main() -> None:
 
     display_sec_policies(api_url, pa_api_key)
     # For custom services: application: "any", service: "custom_service_port"
-    # create_sec_policy(api_url, pa_api_key, "Allow_all_7", "WAN_zone", "DC_zone", 
-    #                   "Servers", "All_DNS_servers", "dns", "application-default", 
-    #                   "allow", "Allow all traffic rule 6")
+    # create_sec_policy(api_url, pa_api_key, "CUST-A-app-99-man", "WAN_zone", "Users", 
+    #                   "DC_zone", "Other_apps", "any", ["tcp_7700", "tcp_7701", "tcp_7702"], 
+    #                   "allow", "APP manual")
     # update_sec_policy(api_url, pa_api_key, "Allow_all_7", "WAN_zone", "DC_zone", 
-                    #   "Servers", "All_DNS_servers", "icmp", "application-default", 
-                    #   "allow", "Allow all traffic rule 7")
+    #                   "Servers", "All_DNS_servers", "icmp", "application-default", 
+    #                   "allow", "Allow all traffic rule 7")
     # delete_sec_policy(api_url, pa_api_key, "Allow_all_traffic4")
     # rename_security_policy(api_url, pa_api_key, "Allow_all_zones5", "Allow_all_5")
     # possible values for from_where: top, bottom, above, below
