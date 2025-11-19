@@ -1,4 +1,4 @@
-from pa_api import create_obj_services, create_obj_addresses
+from pa_api import create_obj_services, create_obj_addresses, create_address_group
 from excel_api import create_config
 import argparse
 
@@ -17,13 +17,10 @@ def main() -> None:
 
     for addr_group in conf["addr_groups"]:
         for addr_object in addr_group["objects"]:
-            for obj_name, obj_value in addr_object.items():
-                create_obj_addresses(args.pa_api_url, args.pa_api_key, obj_name, obj_value, "")
+            for addr_obj_name, addr_obj_value in addr_object.items():
+                create_obj_addresses(args.pa_api_url, args.pa_api_key, addr_obj_name, addr_obj_value, "")
                 # create_obj_addresses(args.pa_api_url, args.pa_api_key, "server2", "10.0.0.2/32", "Server 2")
-
-    # services = display_obj_services(api_url, pa_api_key)
-    # for service in services["result"]["entry"]:
-    #     print(service["@name"], service["protocol"])
+        create_address_group(args.pa_api_url, args.pa_api_key, addr_group["name"], [d.keys() for d in addr_group["objects"]], "")
 
 
 if __name__ == "__main__":
