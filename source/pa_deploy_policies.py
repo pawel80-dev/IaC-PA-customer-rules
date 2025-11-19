@@ -28,9 +28,11 @@ def main() -> None:
         for service in policy["service"]:
             if isinstance(service, dict):
                 service_list.append(service["name"])
+            else:
+                service_list.append(service)
         print(f"POLICY DEPLOY SERVICE LIST: {service_list}")
         create_sec_policy(args.pa_api_url, args.pa_api_key, policy["name"], policy["src_zone"], policy["src_addr"], 
-                          policy["dst_zone"], policy["dst_addr"], policy["app"], policy["service"], policy["action"], policy["description"])
+                          policy["dst_zone"], policy["dst_addr"], policy["app"], service_list, policy["action"], policy["description"])
 
 if __name__ == "__main__":
     main()
