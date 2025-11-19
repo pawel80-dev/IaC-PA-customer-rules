@@ -30,7 +30,6 @@ def main() -> None:
                 service_list.append(service["name"])
             else:
                 service_list.append(service)
-        print(f"POLICY DEPLOY SERVICE LIST: {service_list}")
         create_sec_policy(args.pa_api_url, args.pa_api_key, policy["name"], policy["src_zone"], policy["src_addr"], 
                           policy["dst_zone"], policy["dst_addr"], policy["app"], service_list, policy["action"], policy["description"])
 
