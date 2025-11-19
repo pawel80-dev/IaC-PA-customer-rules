@@ -24,6 +24,10 @@ def main() -> None:
         create_address_group(args.pa_api_url, args.pa_api_key, addr_group["name"], addr_group_items, "")
 
     for policy in conf["policies"]:
+        service_list = []
+        for service in policy["service"]:
+            if isinstance(service, dict):
+                service_list.append(service["name"])
         create_sec_policy(args.pa_api_url, args.pa_api_key, policy["name"], policy["src_zone"], policy["src_addr"], 
                           policy["dst_zone"], policy["dst_addr"], policy["app"], policy["service"], policy["action"], policy["description"])
 
