@@ -1,4 +1,4 @@
-from pa_api import create_obj_services, create_obj_addresses, create_address_group
+from pa_api import create_obj_services, create_obj_addresses, create_address_group, create_sec_policy
 from excel_api import create_config
 import argparse
 
@@ -23,6 +23,9 @@ def main() -> None:
                 addr_group_items.append(addr_obj_name)
         create_address_group(args.pa_api_url, args.pa_api_key, addr_group["name"], addr_group_items, "")
 
+    for policy in conf["policies"]:
+        create_sec_policy(args.pa_api_url, args.pa_api_key, policy["name"], policy["src_zone"], policy["src_addr"], 
+                          policy["dst_zone"], policy["dst_addr"], policy["app"], policy["service"], policy["action"], policy["description"])
 
 if __name__ == "__main__":
     main()

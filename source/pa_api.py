@@ -688,8 +688,8 @@ def display_sec_policies(pa_url: str, api_key: str) -> dict:
         logger.info(response.text)
 
 
-def create_sec_policy(pa_url: str, api_key: str, name: str, src_zone: str, dst_zone: str, 
-                      src_addr: str, dst_addr: str, app: str, 
+def create_sec_policy(pa_url: str, api_key: str, name: str, src_zone: str, src_addr: str,  
+                      dst_zone: str, dst_addr: str, app: str, 
                       service: str, action: str, desc: str = "") -> None:
     api = "/restapi/v11.2/Policies/SecurityRules"
     url = pa_url + api
