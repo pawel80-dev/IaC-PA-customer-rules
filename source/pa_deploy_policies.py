@@ -16,12 +16,12 @@ def main() -> None:
         create_obj_services(args.pa_api_url, args.pa_api_key, service["name"], service["protocol"], service["port"], "")
 
     for addr_group in conf["addr_groups"]:
+        addr_group_items = []
         for addr_object in addr_group["objects"]:
-            addr_group_items = []
             for addr_obj_name, addr_obj_value in addr_object.items():
                 create_obj_addresses(args.pa_api_url, args.pa_api_key, addr_obj_name, addr_obj_value, "")
                 addr_group_items.append(addr_obj_name)
-            create_address_group(args.pa_api_url, args.pa_api_key, addr_group["name"], addr_group_items, "")
+        create_address_group(args.pa_api_url, args.pa_api_key, addr_group["name"], addr_group_items, "")
 
 
 if __name__ == "__main__":
