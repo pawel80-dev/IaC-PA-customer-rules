@@ -1,4 +1,4 @@
-from pa_api import create_obj_services, create_obj_addresses, create_address_group, create_sec_policy
+from pa_api import create_obj_services, create_obj_addresses, create_address_group, create_sec_policy, commit
 from excel_api import create_config
 import argparse
 
@@ -32,6 +32,8 @@ def main() -> None:
                 service_list.append(service)
         create_sec_policy(args.pa_api_url, args.pa_api_key, policy["name"], policy["src_zone"], policy["src_addr"], 
                           policy["dst_zone"], policy["dst_addr"], policy["app"], service_list, policy["action"], policy["description"])
+        
+    commit(args.pa_api_url, args.pa_api_key, "Successfully deployed policies from Excel file.")
 
 if __name__ == "__main__":
     main()

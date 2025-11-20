@@ -35,6 +35,40 @@ pa_api_key = ""
 # run get_api_key() function
 
 
+def commit(pa_url: str, api_key: str, desc: str = "") -> None:
+    api = "/restapi/v11.2/System/Configuration:commit"
+    url = pa_url + api
+    logger.info("Commit the changes...")
+    headers = {
+        "X-PAN-KEY": api_key,
+        "Content-Type": "application/json"
+    }
+
+    payload = json.dumps({
+        "entry": {
+            "description": desc,
+            "force": {
+                "partial": null
+            }
+        }
+    })
+
+    response = requests.post(
+        url=url,
+        headers=headers,
+        data=payload,
+        verify=False
+    )
+
+    if response.status_code == 200:
+        logger.info("PA config changes successfully commited.")
+        logger.info(response.text)
+        return None
+    else:
+        logger.info(f"Failed to commit the changes: {response.status_code}")
+        logger.info(response.text)
+
+
 def get_api_key(pa_url: str, username: str, password: str) -> str:
     api = "/api/?type=keygen"
     url = pa_url + api
