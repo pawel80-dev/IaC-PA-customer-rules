@@ -48,7 +48,7 @@ def commit(pa_url: str, api_key: str, desc: str = "") -> None:
         "entry": {
             "description": desc,
             "force": {
-                "partial": null
+                "partial": None
             }
         }
     })
