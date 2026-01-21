@@ -1028,7 +1028,7 @@ def move_security_policy(pa_url: str, api_key: str, name: str, from_where: str, 
 
 def main() -> None:
     # xml_get_system_info(api_url, pa_api_key)
-    get_api_key(api_url, "api_rw", "Cisco123")
+    get_api_key(api_url, "", "")
 
     display_obj_services(api_url, pa_api_key)
     # create_obj_services(api_url, pa_api_key, "csp2", "udp", "22,24-27", "Custom service port2")
